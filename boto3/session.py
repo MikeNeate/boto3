@@ -172,6 +172,29 @@ class Session(object):
             service_name=service_name, partition_name=partition_name,
             allow_non_regional=allow_non_regional)
 
+
+    def mike_test_method(self, param_one, param_two='aws',
+                                   param_three=False):
+        """Lists some things.
+
+        :type param_one: string
+        :param param_one: Name of the first thing blah blah blah.
+
+        :type param_two: string
+        :param partition_name: Something else
+
+        :type param_three: bool
+        :param allow_non_regional: Set to True to include endpoints that are
+             not regional endpoints (e.g., s3-external-1,
+             fips-us-gov-west-1, etc).
+
+        :return: Returns a list of endpoint names (e.g., ["us-east-1"]).
+        """
+        return self._session.get_available_regions(
+            service_name=param_one, partition_name=param_two,
+            allow_non_regional=param_three)
+
+
     def get_credentials(self):
         """
         Return the :class:`botocore.credential.Credential` object
@@ -261,6 +284,7 @@ class Session(object):
             aws_access_key_id=aws_access_key_id,
             aws_secret_access_key=aws_secret_access_key,
             aws_session_token=aws_session_token, config=config)
+
 
     def resource(self, service_name, region_name=None, api_version=None,
                  use_ssl=True, verify=None, endpoint_url=None,
